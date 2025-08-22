@@ -1,5 +1,5 @@
 import { useState } from "react";
-const NoteForm = () => {
+const NoteForm = ({ notes, setNotes }) => {
   const [formData, setFormData] = useState({
     title: "",
     category: "Work",
@@ -8,15 +8,35 @@ const NoteForm = () => {
   });
 
   const handlechange = (e) => {
-    console.log(e.target.value);
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    // Validation
+    if (!formData.title || !formData.desc) return;
+
+    // Create note object
+    const newNote = { id: Date.now(), ...formData };
+
+    // Update the global state
+    setNotes([newNote, ...notes]);
+
+    // Clear the form
+    setFormData({
+      title: "",
+      category: "Work",
+      prio: "Medium",
+      desc: "",
+    });
+  };
+
   return (
-    <form className="mb-6">
+    <form className="mb-6" onSubmit={onSubmit}>
       {/* Title */}
       <div className="mb-4">
         <label htmlFor="title" className="block font-semibold">
@@ -82,6 +102,15 @@ const NoteForm = () => {
           className="w-full p-2 border rounded-lg"
           onChange={handlechange}
         ></textarea>
+      </div>
+
+      {/* Submit button */}
+      <div className="mb-4">
+        <input
+          type="submit"
+          value="Add note"
+          className="bg-purple-600 w-full p-2 border rounded-lg text-white font-semibold cursor-pointer active:bg-purple-400"
+        />
       </div>
     </form>
   );
