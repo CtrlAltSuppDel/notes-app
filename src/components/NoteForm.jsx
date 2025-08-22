@@ -62,7 +62,7 @@ const NoteForm = ({ notes, setNotes }) => {
 
           {/* Priority */}
           <SelectInput
-            name={"priority"}
+            name={"prio"}
             label={"Priority"}
             onChange={handlechange}
             value={formData.prio}

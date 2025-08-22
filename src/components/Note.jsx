@@ -1,6 +1,15 @@
 const Note = ({ note, deleteNote }) => {
+  const borderColor = {
+    High: "border-l-red-400",
+    Medium: "border-l-yellow-400",
+    Low: "border-l-green-400",
+  };
   return (
-    <div className="border-l-2 rounded-lg mb-4 bg-white shadow-lg p-4">
+    <div
+      className={`border-l-4 ${
+        borderColor[note.prio]
+      } rounded-lg mb-4 bg-white shadow-lg p-4 `}
+    >
       <h3 className="font-semibold ">{note.title}</h3>
       <p className="text-sm text-gray-600">
         <strong>Category</strong> :{" "}
