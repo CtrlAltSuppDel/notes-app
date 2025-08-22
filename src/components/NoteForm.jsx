@@ -1,4 +1,7 @@
 import { useState } from "react";
+import TextInput from "./inputs/TextInput";
+import SelectInput from "./inputs/SelectInput";
+import TextAreaInput from "./inputs/TextAreaInput";
 const NoteForm = ({ notes, setNotes }) => {
   const [formData, setFormData] = useState({
     title: "",
@@ -50,71 +53,46 @@ const NoteForm = ({ notes, setNotes }) => {
       {isFormVisible && (
         <form className="mb-6" onSubmit={onSubmit}>
           {/* Title */}
-          <div className="mb-4">
-            <label htmlFor="title" className="block font-semibold">
-              Title
-            </label>
-            <input
-              type="text"
-              name="title"
-              id="title"
-              className="w-full p-2 border rounded-lg"
-              value={formData.title}
-              onChange={handlechange}
-            />
-          </div>
+          <TextInput
+            label={"Title"}
+            value={formData.title}
+            onChange={handlechange}
+            name={"title"}
+          />
 
           {/* Priority */}
-          <div className="mb-4">
-            <label htmlFor="prio" className="block font-semibold">
-              Priority
-            </label>
-            <select
-              type="text"
-              name="prio"
-              id="prio"
-              className="w-full p-2 border rounded-lg"
-              value={formData.prio}
-              onChange={handlechange}
-            >
-              <option value="High">🔴 High</option>
-              <option value="Medium">🟡 Medium</option>
-              <option value="Low">🟢 Low</option>
-            </select>
-          </div>
+          <SelectInput
+            name={"priority"}
+            label={"Priority"}
+            onChange={handlechange}
+            value={formData.prio}
+            options={[
+              { value: "High", label: "🔴 High" },
+              { value: "Medium", label: "🟡 Medium" },
+              { value: "Low", label: "🟢 Low" },
+            ]}
+          />
 
           {/* Category */}
-          <div className="mb-4">
-            <label htmlFor="category" className="block font-semibold">
-              Category
-            </label>
-            <select
-              type="text"
-              name="category"
-              id="category"
-              className="w-full p-2 border rounded-lg"
-              value={formData.category}
-              onChange={handlechange}
-            >
-              <option value="Work">🏢 Work</option>
-              <option value="Personnal">🏠 Personnal</option>
-              <option value="Ideas">💡 Ideas</option>
-            </select>
-          </div>
+          <SelectInput
+            name={"category"}
+            label={"Category"}
+            onChange={handlechange}
+            value={formData.category}
+            options={[
+              { value: "Work", label: "🏢 Work" },
+              { value: "Personnal", label: "🏠 Personnal" },
+              { value: "Ideas", label: "💡 Ideas" },
+            ]}
+          />
 
           {/* Description */}
-          <div className="mb-4">
-            <label htmlFor="desc" className="block font-semibold">
-              Description
-            </label>
-            <textarea
-              name="desc"
-              id="desc"
-              value={formData.desc}
-              className="w-full p-2 border rounded-lg"
-              onChange={handlechange}
-            ></textarea>
-          </div>
+          <TextAreaInput
+            label={"Description"}
+            name={"desc"}
+            value={formData.desc}
+            onChange={handlechange}
+          />
 
           {/* Submit button */}
           <div className="mb-4">
