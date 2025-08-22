@@ -1,9 +1,19 @@
 import { useState } from "react";
 const NoteForm = () => {
-  const [title, setTitle] = useState("");
-  const [prio, setPrio] = useState("Medium");
-  const [category, setCategory] = useState("Work");
-  const [desc, setDesc] = useState("");
+  const [formData, setFormData] = useState({
+    title: "",
+    category: "Work",
+    prio: "Medium",
+    desc: "",
+  });
+
+  const handlechange = (e) => {
+    console.log(e.target.value);
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   return (
     <form className="mb-6">
@@ -17,8 +27,8 @@ const NoteForm = () => {
           name="title"
           id="title"
           className="w-full p-2 border rounded-lg"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={formData.title}
+          onChange={handlechange}
         />
       </div>
 
@@ -32,8 +42,8 @@ const NoteForm = () => {
           name="prio"
           id="prio"
           className="w-full p-2 border rounded-lg"
-          value={prio}
-          onChange={(e) => setPrio(e.target.value)}
+          value={formData.prio}
+          onChange={handlechange}
         >
           <option value="High">🔴 High</option>
           <option value="Medium">🟡 Medium</option>
@@ -51,8 +61,8 @@ const NoteForm = () => {
           name="category"
           id="category"
           className="w-full p-2 border rounded-lg"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          value={formData.category}
+          onChange={handlechange}
         >
           <option value="Work">🏢 Work</option>
           <option value="Personnal">🏠 Personnal</option>
@@ -68,9 +78,9 @@ const NoteForm = () => {
         <textarea
           name="desc"
           id="desc"
-          value={desc}
+          value={formData.desc}
           className="w-full p-2 border rounded-lg"
-          onChange={(e) => setDesc(e.target.value)}
+          onChange={handlechange}
         ></textarea>
       </div>
     </form>
